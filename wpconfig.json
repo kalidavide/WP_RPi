@@ -1,0 +1,19 @@
+
+{
+    "_metadata": {
+      "Description": "Config file Wifi Pentesting Pi",
+      "Author": "Lucas G. & Davide B.",
+      "Version": "1.0",
+      "Date": "2024-11-18",
+      "Info": "Below the configuration variables for the 'Wifi-Pentesting Pi' are defined"
+
+    },
+    "interface": "wlan0mon",
+    "scan_output": "/usr/wppi/scans/scanned_networks.csv",
+    "handshakes_output": "/usr/wppi/handshakes/handshakes",
+    "mac_ssid_file": "mac_ssid_list.txt",
+    "wordlist": "/usr/wppi/wordlists/rockyou.txt"
+
+  }
+  
+  
