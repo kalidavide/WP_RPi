@@ -1,14 +1,17 @@
 {
-    "_metadata": {
+  "_metadata": {
       "Description": "Config file Wifi Pentesting Pi",
       "Author": "Lucas G. & Davide B.",
-      "Version": "1.0",
+      "Version": "1.2",
       "Date": "18.11.2024",
       "Info": "Below the configuration variables for the 'Wifi-Pentesting Pi' are defined"
+  },
+  "interface": "wlan1",
+  "scan_dir": "./network_scans",
+  "network_info": "./network_info.csv",
+  "handshakes_dir": "./handshakes",
+  "wordlist": "./wordlist/wordlist.txt",
+  "scan_duration": 60,
+  "results_file": "./crack_results.csv"
+}
 
-    },
-    "interface": "wlan1",  
-    "scan_dir": "./network_scans",  
-    "scan_duration": 60 
-
-  }
