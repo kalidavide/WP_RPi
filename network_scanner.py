@@ -35,6 +35,14 @@ def rfkill_unblock_wifi():
     except Exception as e:
         print(f"[ERROR] Something went wrong, wifi still blocked: {e}")
 
+def rfkill_block_wifi():
+    """Block WLAN adapter"""
+    try:
+        os.system("rfkill block wifi")
+        print("[INFO] wifi is blocked")
+    except Exception as e:
+        print(f"[ERROR] Something went wrong, wifi still unblocked: {e}")
+
 def enable_monitor_mode(interface):
     """Enable monitor mode"""
     print("[INFO] Enabling monitor mode...")
@@ -106,6 +114,7 @@ def main():
     network_info_file = os.path.join(output_dir, "network_info.csv")
     
     try:
+        rfkill_unblock_wifi()
         enable_monitor_mode(interface)
         scan_networks(interface, scan_output_prefix, scan_duration)
         csv_file = scan_output_prefix + "-01.csv"  
@@ -117,6 +126,7 @@ def main():
         print(f"[ERROR] {e}")
     finally:
         disable_monitor_mode(interface)
+        rfkill_block_wifi()
 
 if __name__ == "__main__":
     main()
