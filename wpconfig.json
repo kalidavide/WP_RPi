@@ -8,7 +8,7 @@
   },
   "interface": "wlan1",
   "scan_dir": "./network_scans",
-  "network_info": "./network_info.csv",
+  "network_info": "./network_scans/network_info.csv",
   "handshakes_dir": "./handshakes",
   "wordlist": "./wordlist/wordlist.txt",
   "scan_duration": 60,
