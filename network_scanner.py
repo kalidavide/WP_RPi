@@ -27,6 +27,14 @@ def setup_output(output_dir):
     else:
         print(f"[INFO] Using existing directory: {output_dir}")
 
+def rfkill_unblock_wifi():
+    """Unblock WLAN adapter"""
+    try:
+        os.system("rfkill unblock wifi")
+        print("[INFO] wifi is unblocked")
+    except Exception as e:
+        print(f"[ERROR] Something went wrong, wifi still blocked: {e}")
+
 def enable_monitor_mode(interface):
     """Enable monitor mode"""
     print("[INFO] Enabling monitor mode...")
