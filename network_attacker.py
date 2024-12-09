@@ -1,9 +1,9 @@
 """
 Name:           Network Attacker 
-Version:        1.1
+Version:        1.2
 Author:         Lucas G. 
 Description:    Reads target, captures Handshakes and attempts to brute force Wifi using a wordlist
-Date:           2.12.2024
+Date:           9.12.2024
 Usage:          python3 network_attacker.py
 Dependencies:   aircrack-ng, Python 3.x, Targets file, Wordlist, wireless adapter supporting monitor mode
 """
@@ -11,7 +11,12 @@ Dependencies:   aircrack-ng, Python 3.x, Targets file, Wordlist, wireless adapte
 import subprocess, csv, os, time, json, glob
 
 def load_config(config_file="wpconfig.json"):
-    """Load config"""
+    """
+    Loads central config file
+
+    - Load config file
+    - Error handling
+    """
     try:
         with open(config_file, "r") as f:
             return json.load(f)
@@ -20,7 +25,12 @@ def load_config(config_file="wpconfig.json"):
         exit(1)
 
 def read_targets(network_info):
-    """Read target information"""
+    """
+    Reads network info file and extracts all columns as targets
+
+    - Read network info and extract all columns as targets
+    - Error handling
+    """
     try:
         with open(network_info, "r") as file:
             reader = csv.DictReader(file)
@@ -37,7 +47,14 @@ def read_targets(network_info):
         exit(1)
 
 def capture_handshake(interface, target, handshakes_dir):
-    """Capture handshake"""
+    """
+    Capture handshakes and send deauthentication packets to client to force handshake
+
+    - Define variables
+    - Start airodump-ng to capture packets for all targets in network info file
+    - Send deauthentication packets to force handshake
+    - Error handling
+    """
     mac = target["mac"]
     ssid = target["ssid"].replace(" ", "_") 
     channel = target["channel"]
@@ -76,7 +93,15 @@ def capture_handshake(interface, target, handshakes_dir):
         return False
 
 def attack_network(wordlist, target, handshakes_dir, results_file):
-    """Perform wordlist attack."""
+    """
+    Perform attack using information collected from previous functions and scripts
+
+    - Define variables
+    - Perform (brute force) attack using aircrack-ng, captured handshake and provided wordlist
+    - If wordlist contains the key, a success message is displayed and the key is writted into 'crack_results' file
+    - If wordlist doesn't contain the key, a failed to crack message is displayed and the result is displayed as failed in the 'crack_results' file
+    - Error handling
+    """
     mac = target["mac"]
     ssid = target["ssid"]
     base_filename = f"{ssid.replace(' ', '_')}_{mac}"
@@ -111,7 +136,15 @@ def attack_network(wordlist, target, handshakes_dir, results_file):
             outfile.write(f"{ssid},{mac},Error,\n")
 
 def main():
-    """Main function to call functions and execute attack"""
+    """
+    Main function to call functions and create handshakes output 
+
+    - Call 'load_config' function and define variables
+    - Create handshakes output directory
+    - Call 'read_targets' function
+    - If targets is not empty, execute attack by calling 'capture_handshake' & 'attack_network' function
+    - Error handling
+    """
     config = load_config()
     network_info = config.get("network_info")
     handshakes_dir = config.get("handshakes_dir")
