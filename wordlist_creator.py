@@ -1,6 +1,6 @@
 """
 Name:           Wordlist Creator
-Version:        1.0
+Version:        1.1
 Author:         Lucas G. 
 Description:    Creates a random wordlist which can be used for Wifi Pentesting
 Date:           2.12.2024
@@ -9,18 +9,29 @@ Dependencies:   python3
 """
 import random, string, os
 
-
 def setup_output(wordlist_dir="wordlist"):
-    """Create output"""
+    """
+    Creates output directory for Wordlist
+
+    - Check for output directory
+    - If not existing, create output directory
+    - Error handling
+    """
     if not os.path.exists(wordlist_dir):
         os.makedirs(wordlist_dir)
         print(f"[INFO] Created folder: {wordlist_dir}")
     else:
-        print(f"[INFO] Folder '{wordlist_dir}' already exists.")
+        print(f"[INFO] Using existing directory: '{wordlist_dir}'")
     return wordlist_dir
 
 def parameter_input():
-    """Prompt user for wordlist parameters"""
+    """
+    Prompt user for wordlist parameters
+
+    - User input for Min- /Max characters and amount of passwords to generate
+    - User input to define what characters to use for generated passwords
+    - Error handling
+    """
     try:
         min_length = int(input("Enter minimum password length: "))
         max_length = int(input("Enter maximum password length: "))
@@ -36,8 +47,8 @@ def parameter_input():
         elif char_choice == 2:
             charset = string.ascii_letters + string.digits
         else:
-            print("[ERROR] Invalid choice. Defaulting to letters and numbers.")
-            charset = string.ascii_letters + string.digits
+            print(f"[ERROR] Invalid input: {e}")
+            exit(1)
 
         return min_length, max_length, wordlist_size, charset
     except ValueError as e:
@@ -45,7 +56,12 @@ def parameter_input():
         exit(1)
 
 def generate_wordlist(wordlist_dir, min_length, max_length, wordlist_size, charset):
-    """Generate a wordlist based on parameters"""
+    """
+    Generate wordlist based on 'parameter_input' function
+
+    - Define wordlistname in output directory
+    - Generate wordlist based on user submitted parameters
+    """
     file_path = os.path.join(wordlist_dir, "wordlist.txt")
     print(f"[INFO] Generating wordlist with {wordlist_size} passwords...")
 
@@ -59,7 +75,12 @@ def generate_wordlist(wordlist_dir, min_length, max_length, wordlist_size, chars
     return file_path
 
 def main():
-    """Main function to handle wordlist generation."""
+    """
+    Main function to call other functions and define variables
+
+    - Define variables by calling functions 'setup_output' and 'parameter_input'
+    - Generate wordlist based on variables provided
+    """
     wordlist_dir = setup_output()
     min_length, max_length, wordlist_size, charset = parameter_input()
     generate_wordlist(wordlist_dir, min_length, max_length, wordlist_size, charset)
