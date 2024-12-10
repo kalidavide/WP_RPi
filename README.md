@@ -25,6 +25,7 @@ cd WP_RPI
    Edit the wpconfig.json with your editor of choice and change the configuration variables as needed
    
 3.  **Run network scanner**
+
 The scanner will set your defined wifi adapter to monitor mode and scan for available networks in the area, all results will be writted into the network_scan-0X.csv and network_info.csv files.
 ```bash
 sudo python3 network_scanner.py
