@@ -42,7 +42,7 @@ sudo python3 wordlist_creator.py
 ```
 You can also use a custom wordlist, just make sure the wordlist directory exists and the name of the used wordlist is defined in the wpconfig.json
    
-5.  **Run network attacker**
+6.  **Run network attacker**
 The script will attempt to capture a handshake and then brute force the key using all entires of the wordlist. 
 ```bash
 sudo python3 network_attacker.py
