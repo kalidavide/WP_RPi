@@ -1,8 +1,26 @@
-# WP_RPi
- Project for scool
+# Wifi Pentesting Raspberry PI (WP_RPI)
 
-Usage:
+## General info
 
+This repo contains a collection of python programms that can be used for Wifi-Pentesting. 
+Pentesting should only be performed on networks where you are authorized to do so!
+---
+
+## Prerequisites
+
+- **Raspberry Pi with Pi OS or Kali Linux**
+- **Python 3.X**
+- **aircrack-ng suite**
+- **Wifi adapter with a chipset supporting monitor mode**
+
+## Install and usage
+```bash
+git clone https://github.com/kalidavide/WP_RPi.git
+'''
+
+1. **Clone repository**
+   
+3. 
 
 1. Run Network_scanner.py
 
