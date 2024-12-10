@@ -5,6 +5,8 @@
 This repo contains a collection of python programms that can be used for Wifi-Pentesting. 
 Pentesting should only be performed on networks where you are authorized to do so!
 
+Project for school by Davide B. & Lucas G.
+
 ---
 
 ## Prerequisites
