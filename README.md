@@ -14,26 +14,42 @@ Pentesting should only be performed on networks where you are authorized to do s
 - **Wifi adapter with a chipset supporting monitor mode**
 
 ## Install and usage
-```bash
-git clone https://github.com/kalidavide/WP_RPi.git
-'''
 
 1. **Clone repository**
+```bash
+git clone https://github.com/kalidavide/WP_RPi.git
+cd WP_RPI
+```
+
+2. **Set configuration parameter**
+   Edit the wpconfig.json with your editor of choice and change the configuration variables as needed
    
-3. 
-
-1. Run Network_scanner.py
-
+3.  **Run network scanner**
+The scanner will set your defined wifi adapter to monitor mode and scan for available networks in the area, all results will be writted into the network_scan-0X.csv and network_info.csv files.
+```bash
 sudo python3 network_scanner.py
+```
 
-The Scanner will scan for possible targets and write target information into the ./network_scans/network_info.csv File.
+   
+4.  **Check the network_scans folder**
+The network_scans folder should now contain a network_scan-0X.csv and a network_info.csv file. 
+**Attention**
+All networks listed in the network_info.csv file will be used as targets by the network attacker, remove any that you don't want to attack before running the attacker.
 
-2. Remove all lines except for the networks you would like to attack
-
-3. Create a custom Wordlist using the wordlist_creator.py script
-
+4.  **Create a wordlist to perform the attack**
+```bash
 sudo python3 wordlist_creator.py
+```
+You can also use a custom wordlist, just make sure the wordlist directory exists and the name of the used wordlist is defined in the wpconfig.json
+   
+5.  **Run network attacker**
+The script will attempt to capture a handshake and then brute force the key using all entires of the wordlist. 
+```bash
+sudo python3 network_attacker.py
+```
+The results of successful or unsuccessful attempts will be written in the crack_results.csv file.
 
-4. Run the network_attacker.py to attack all networks in the network_info file
 
-5. Any networks that were attacked will be written into the crack_results.csv file, including the key if the attack was successfull.
+
+
+
