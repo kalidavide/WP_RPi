@@ -47,7 +47,7 @@ def rfkill_unblock():
     """
     try:
         os.system("rfkill unblock wifi")
-        print("[INFO] wifi is unblocked")
+        print("[INFO] Wifi is unblocked")
     except Exception as e:
         print(f"[ERROR] Something went wrong, wifi still blocked: {e}")
 
