@@ -1,9 +1,9 @@
 """
 Name:           Network Attacker 
-Version:        1.2
+Version:        1.3
 Author:         Lucas G. 
 Description:    Reads target, captures Handshakes and attempts to brute force Wifi using a wordlist
-Date:           9.12.2024
+Date:           11.12.2024
 Usage:          python3 network_attacker.py
 Dependencies:   aircrack-ng, Python 3.x, Targets file, Wordlist, wireless adapter supporting monitor mode
 """
@@ -45,6 +45,19 @@ def read_targets(network_info):
     except Exception as e:
         print(f"[ERROR] Failed to read targets file: {e}")
         exit(1)
+
+def rfkill_unblock():
+    """
+    Unblocks (potentially) disabled Wifi Hardware
+
+    - Unblock all wifi adapters
+    - Error handling
+    """
+    try:
+        os.system("rfkill unblock wifi")
+        print("[INFO] wifi is unblocked")
+    except Exception as e:
+        print(f"[ERROR] Something went wrong, wifi still blocked: {e}")
 
 def capture_handshake(interface, target, handshakes_dir):
     """
@@ -162,6 +175,7 @@ def main():
         exit(1)
 
     for target in targets:
+        rfkill_unblock()
         capture_handshake(interface, target, handshakes_dir)
 
     for target in targets:
