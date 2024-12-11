@@ -1,4 +1,4 @@
-# Wifi Pentesting Raspberry PI (WP_RPI)
+# Wifi Pentesting Raspberry PI (WP_RPI) [Proof of Concept]
 
 ## General info
 
